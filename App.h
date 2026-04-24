@@ -2,17 +2,20 @@
 #define APP_H
 
 #include <string>
+#include "Storage.h"
 
 class App {
 public:
     void run();
 
 private:
-    std::string currentUser;
+    std::string currentUserName;
+    int currentUserRole; // 0 - Користувач, 1 - Адмін
 
     void startMenu();
     bool login();
-    void menu();
+    void userMenu();  // Меню для звичайного користувача
+    void adminMenu(); // Панель адміністратора
 };
 
 #endif
