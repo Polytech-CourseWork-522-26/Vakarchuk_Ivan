@@ -8,46 +8,38 @@ using namespace std;
 
 void Recipe::showAll() {
     auto list = Storage::getAllRecipes();
-
     if (list.empty()) {
-        cout << "Немає рецептів\n";
+        cout << "\nРецептів поки немає.\n";
         return;
     }
 
-    while (true) {
-        cout << "\n=== СПИСОК РЕЦЕПТІВ ===\n";
-        cout << "1. 🔙 Назад\n";
+    cout << "\n=== СПИСОК РЕЦЕПТІВ ===\n";
+    for (int i = 0; i < list.size(); i++) {
+        cout << i + 1 << ". " << list[i].name << " (Автор: " << list[i].author << ")\n";
+    }
 
-        for (int i = 0; i < list.size(); i++) {
-            cout << i + 2 << ". " << list[i].name << endl;
-        }
+    int sel;
+    cout << "\nОберіть номер для перегляду (0 - назад): ";
+    if (!(cin >> sel) || sel == 0) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        return;
+    }
 
-        int sel;
-        cout << "Оберіть: ";
-        cin >> sel;
-
-        if (sel == 1) return;
-
-        if (sel >= 2 && sel <= list.size() + 1) {
-            auto& r = list[sel - 2];
-
-            cout << "\n===== РЕЦЕПТ: " << r.name << " =====\n";
-            cout << "Автор: " << r.author << endl;
-            cout << "Опис: " << r.description << endl;
-            cout << "-----------------------------------\n";
-            cout << "🍎 ІНГРЕДІЄНТИ:\n" << r.ingredients << endl;
-            cout << "-----------------------------------\n";
-            cout << "👨‍🍳 ПРИГОТУВАННЯ:\n" << r.instructions << endl;
-            cout << "-----------------------------------\n";
-            cout << "🔥 Калорійність: " << r.calories << " ккал" << endl;
-
-            cout << "\nНатисніть Enter, щоб повернутися...";
-            cin.ignore();
-            cin.get();
-        }
+    if (sel > 0 && sel <= list.size()) {
+        auto& res = list[sel - 1];
+        cout << "\n-----------------------------------";
+        cout << "\nНАЗВА: " << res.name;
+        cout << "\nОПИС: " << res.description;
+        cout << "\nКАЛОРІЇ: " << res.calories << " ккал";
+        cout << "\nІНГРЕДІЄНТИ:\n" << res.ingredients;
+        cout << "\nІНСТРУКЦІЯ:\n" << res.instructions;
+        cout << "\n-----------------------------------\n";
+        cout << "Натисніть Enter, щоб повернутися...";
+        cin.ignore();
+        cin.get();
     }
 }
-
 // =======================
 // ➕ СТВОРЕННЯ
 // =======================
@@ -55,34 +47,41 @@ void Recipe::createFlow(const string& user) {
     RecipeData r;
     r.id = stoi(IDGenerator::generate("recipe_id.txt"));
 
+    // КРОК 1: Очищаємо буфер перед getline
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    string temp;
 
+    string temp;
     cout << "\n=== СТВОРЕННЯ РЕЦЕПТА ===\n";
 
     cout << " Назва: ";
     getline(cin, temp);
-    strcpy_s(r.name, temp.c_str());
+    strncpy_s(r.name, sizeof(r.name), temp.c_str(), _TRUNCATE);
 
-    cout << " Короткий опис: ";
+    cout << " Опис: ";
     getline(cin, temp);
-    strcpy_s(r.description, temp.c_str());
+    strncpy_s(r.description, sizeof(r.description), temp.c_str(), _TRUNCATE);
 
-    cout << " Інгредієнти: ";
+    cout << " Інгредієнти (текстом): ";
     getline(cin, temp);
-    strcpy_s(r.ingredients, temp.c_str());
+    strncpy_s(r.ingredients, sizeof(r.ingredients), temp.c_str(), _TRUNCATE);
 
     cout << " Спосіб приготування: ";
     getline(cin, temp);
-    strcpy_s(r.instructions, temp.c_str());
+    strncpy_s(r.instructions, sizeof(r.instructions), temp.c_str(), _TRUNCATE);
 
     cout << " Калорії: ";
     cin >> r.calories;
 
-    strcpy_s(r.author, user.c_str());
+    // КРОК 2: Очищаємо буфер ПІСЛЯ введення числа
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    strncpy_s(r.author, sizeof(r.author), user.c_str(), _TRUNCATE);
+    r.author_id = 0; // Можна додати пошук ID автора за потребою
 
     Storage::saveRecipe(r);
-    cout << "✔ Рецепт збережено!\n";
+
+    cout << "\n✔ Рецепт збережено! Натисніть Enter для повернення в меню...";
+    cin.get();
 }
 void Recipe::editFlow(const string& user) {
     auto list = Storage::getAllRecipes();
