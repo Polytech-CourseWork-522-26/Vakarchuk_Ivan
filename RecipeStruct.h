@@ -1,6 +1,9 @@
 #ifndef RECIPE_STRUCT_H
 #define RECIPE_STRUCT_H
-
+struct FavoriteRecipe {
+    char username[50]; // Переконайся, що розмір достатній
+    int recipe_id;
+};
 struct RecipeData {
     int id;
     int author_id;

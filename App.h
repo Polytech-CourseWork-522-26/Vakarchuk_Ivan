@@ -11,7 +11,7 @@ public:
 private:
     std::string currentUserName;
     int currentUserRole; // 0 - Користувач, 1 - Адмін
-
+    void manageUsers();
     void startMenu();
     bool login();
     void userMenu();  // Меню для звичайного користувача

@@ -8,4 +8,4 @@ public:
     static std::string generate(const std::string& fileName);
 };
 
-#endif#pragma once
+#endif
