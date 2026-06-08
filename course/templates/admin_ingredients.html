@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Інгредієнти - SmartCook</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="/static/js/theme.js"></script>
+</head>
+<body>
+
+<header class="navbar">
+    <a href="/" class="logo">SmartCook 🍳 <span style="color:var(--danger); font-size:16px;">(Адмін)</span></a>
+    <nav>
+        <a href="/">Головна</a>
+        <a href="/admin">Керування</a>
+        <a href="/admin/stats">📊 Статистика</a>
+        <a href="/admin/reports">📝 Скарги</a>
+        <a href="/admin/ingredients" class="active">🥕 Інгредієнти</a>
+    </nav>
+    
+</header>
+
+<div class="page-container">
+    <h1 style="margin-bottom: 25px; font-weight: 800;">🥕 Керування інгредієнтами</h1>
+
+    <div class="add-form">
+        <h3>➕ Додати новий інгредієнт</h3>
+        <div class="form-row">
+            <input type="text" id="ing-name" placeholder="Назва продукту">
+            <input type="text" id="ing-manufacturer" placeholder="Виробник">
+            <input type="text" id="ing-category" placeholder="Категорія (овочі, м'ясо...)">
+            <select id="ing-unit">
+                <option value="г">г</option>
+                <option value="кг">кг</option>
+                <option value="мл">мл</option>
+                <option value="л">л</option>
+                <option value="шт">шт</option>
+            </select>
+        </div>
+        <button class="btn btn-primary" onclick="addIngredient()">➕ Додати</button>
+        <span id="add-message" style="margin-left:15px; font-size:14px; font-weight: 600;"></span>
+    </div>
+
+    <div class="modern-table-container">
+        <table class="modern-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Назва</th>
+                    <th>Виробник</th>
+                    <th>Категорія</th>
+                    <th>Одиниця</th>
+                    <th>Дія</th>
+                </tr>
+            </thead>
+            <tbody id="ing-tbody">
+                <tr><td colspan="6" style="text-align:center; color:#888; padding:30px;">Завантаження...</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="/static/js/admin_ingredients.js"></script>
+
+</body>
+</html>

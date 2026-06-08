@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список покупок - SmartCook</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="/static/js/theme.js"></script>
+</head>
+<body style="background-color: var(--bg-color);">
+    <header class="navbar">
+        <a href="/" class="logo">SmartCook 🍳</a>
+        <nav>
+            <a href="/">Головна</a>
+            <a href="/favorites">Обране</a>
+            <a href="/shopping-list" class="active">Список покупок</a>
+            <a href="/create">Додати рецепт</a>
+            <a href="/profile">👤 Профіль</a>
+            {{#isAdmin}}
+            <a href="/admin" style="color: var(--danger); font-weight: bold;">⚙️ Адмін</a>
+            {{/isAdmin}}
+        </nav>
+        
+    </header>
+
+    <div class="shopping-container">
+        <div class="shopping-card">
+            <div class="shopping-header">
+                <h1 style="font-weight: 800; color: var(--text-primary); font-size: 28px;">🛒 Список покупок</h1>
+                {{#has_items}}
+                <button onclick="clearShoppingList()" class="btn btn-danger btn-small">
+                    🗑️ Очистити список
+                </button>
+                {{/has_items}}
+            </div>
+
+            <div class="recipe-section" style="padding: 20px 0; border-bottom: 1px solid var(--border-color);">
+                <h3 style="font-weight: 700; color: var(--text-primary); margin-bottom: 15px;">📌 З улюблених рецептів</h3>
+                <div id="fav-items"></div>
+            </div>
+
+            <div class="recipe-section" style="padding: 20px 0; border-bottom: none; padding-bottom: 0;">
+                <h3 style="font-weight: 700; color: var(--text-primary); margin-bottom: 15px;">✍️ Додані вручну</h3>
+                <div id="manual-items"></div>
+            </div>
+
+            <div id="empty-message" class="no-reports" style="display:none; margin-top: 20px;">
+                <p style="font-size: 18px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px;">Список покупок порожній</p>
+                <p style="color: var(--text-secondary); font-size: 14px;">Додайте продукти з ваших улюблених рецептів ❤️</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/shopping.js?v=2"></script>
+    
+    <!-- JSON дані для JS -->
+    <script id="shopping-data" type="application/json">
+        {{{shopping_items}}}
+    </script>
+</body>
+</html>

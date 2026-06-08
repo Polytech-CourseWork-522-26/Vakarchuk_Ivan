@@ -1,0 +1,115 @@
+<!DOCTYP<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartCook - Додати рецепт</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <script src="/static/js/theme.js"></script>
+</head>
+<body style="background-color: var(--bg-color);">
+
+<header class="navbar">
+    <a href="/" class="logo">SmartCook 🍳</a>
+    <nav>
+        <a href="/">Головна</a>
+        <a href="/favorites">Обране</a>
+        <a href="/shopping-list">Список покупок</a>
+        <a href="/create" class="active">Додати рецепт</a>
+        <a href="/profile">👤 Профіль</a>
+        {{#isAdmin}}
+        <a href="/admin" style="color: var(--danger); font-weight: bold;">⚙️ Адмін</a>
+        {{/isAdmin}}
+    </nav>
+    
+</header>
+
+<main class="create-container">
+    <div class="create-card">
+        <h1>Новий рецепт 📝</h1>
+
+        <form id="create-recipe-form" enctype="multipart/form-data">
+
+            <div class="form-grid">
+                <div class="input-group">
+                    <label for="recipe-name">Назва страви *</label>
+                    <input type="text" name="name" id="recipe-name" required placeholder="Наприклад: Гарбузовий суп-пюре">
+                </div>
+                <div class="input-group">
+                    <label for="recipe-type">Тип страви</label>
+                    <select name="type" id="recipe-type">
+                        <option value="Перші страви">Перші страви</option>
+                        <option value="Другі страви">Другі страви</option>
+                        <option value="Салати">Салати</option>
+                        <option value="Десерти">Десерти</option>
+                        <option value="Випічка">Випічка</option>
+                        <option value="Інше" selected>Інше</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-grid">
+                <div class="input-group">
+                    <label for="recipe-calories">Калорійність (ккал) *</label>
+                    <input type="number" name="calories" id="recipe-calories" required min="1" placeholder="Наприклад: 350">
+                </div>
+                <div class="input-group">
+                    <label for="recipe-video">Посилання на відео (YouTube)</label>
+                    <input type="url" name="video_url" id="recipe-video" placeholder="https://youtube.com/watch?v=...">
+                </div>
+            </div>
+
+            <div class="form-grid">
+                <div class="input-group">
+                    <label>Фото страви</label>
+                    <div class="photo-upload-zone" onclick="document.getElementById('recipe-photo').click()">
+                        <span class="upload-icon">📸</span>
+                        <span class="upload-text" style="font-weight: 500; font-size: 14px; color: var(--text-secondary);">Клікніть, щоб обрати фото</span>
+                        <input type="file" name="recipe_photo" id="recipe-photo" accept="image/*" style="display: none;">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="recipe-desc">Короткий опис *</label>
+                    <input type="text" name="description" id="recipe-desc" required placeholder="Наприклад: Ніжний осінній суп з насінням гарбуза">
+                </div>
+            </div>
+
+            <div class="ingredients-box">
+                <h3 style="margin-bottom: 15px; font-weight: 700; color: var(--text-primary);">Складники рецепта 🍏</h3>
+                <div id="ingredients-list-container"></div>
+
+                <div class="ingredients-search-row">
+                    <div class="ingredients-search-wrap">
+                        <input type="text" id="ingredient-search-input" class="search-input" placeholder="🔍 Введіть назву продукту..." style="padding-left: 20px;">
+                        <div id="search-dropdown" class="dropdown"></div>
+                    </div>
+                    <input type="number" id="ingredient-qty" class="search-input" placeholder="К-сть" step="0.1" style="width: 120px; padding-left: 15px;">
+                    <button type="button" id="add-ing-row-btn" class="btn btn-primary" style="padding: 12px 22px; font-size: 20px; line-height: 1;">+</button>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="recipe-instructions">Покрокова інструкція *</label>
+                <textarea name="instructions" id="recipe-instructions" rows="10" required placeholder="1. Очистіть гарбуз та наріжте кубиками..."></textarea>
+            </div>
+
+            <button type="submit" id="submit-btn" class="btn btn-primary" style="width: 100%; margin-top: 15px; font-size: 17px;">
+                Зберегти рецепт
+            </button>
+            <span id="submit-error" class="error-message" style="text-align: center;"></span>
+
+        </form>
+    </div>
+</main>
+
+<script>
+    const ALL_SYSTEM_INGREDIENTS = [
+        {{#all_ingredients}}
+        { id: {{id}}, name: "{{name}}", unit: "{{unit}}" },
+        {{/all_ingredients}}
+    ];
+</script>
+<script src="/static/js/create.js"></script>
+
+</body>
+</html>

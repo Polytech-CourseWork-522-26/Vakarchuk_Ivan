@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Статистика - Адмін</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="/static/js/theme.js"></script>
+</head>
+<body>
+    <header class="navbar">
+        <a href="/" class="logo">SmartCook 🍳 <span style="color: var(--danger); font-size: 15px; font-weight: bold;">(Адмін)</span></a>
+        <nav>
+            <a href="/">Головна</a>
+            <a href="/admin">Панель керування</a>
+            <a href="/admin/stats" class="active">📊 Статистика</a>
+            <a href="/admin/reports">📝 Скарги</a>
+            <a href="/admin/ingredients">🥕 Інгредієнти</a>
+        </nav>
+        
+    </header>
+
+    <main class="shopping-container" style="margin-top: 50px;">
+        <div class="shopping-card">
+            <h1 style="color: var(--text-primary); font-weight: 800; font-size: 32px; margin-bottom: 30px; text-align: center;">📊 Статистика системи</h1>
+            
+            <div class="admin-stats-grid" style="margin-top: 30px;">
+                <div class="admin-stat-card">
+                    <div class="admin-stat-number">{{total_users}}</div>
+                    <div class="admin-stat-label">Користувачів</div>
+                </div>
+                <div class="admin-stat-card">
+                    <div class="admin-stat-number">{{total_admins}}</div>
+                    <div class="admin-stat-label">Адміністраторів</div>
+                </div>
+                <div class="admin-stat-card">
+                    <div class="admin-stat-number">{{total_recipes}}</div>
+                    <div class="admin-stat-label">Рецептів</div>
+                </div>
+                <div class="admin-stat-card">
+                    <div class="admin-stat-number">{{total_ingredients}}</div>
+                    <div class="admin-stat-label">Інгредієнтів</div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="/admin" class="btn btn-gray">Повернутися назад</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

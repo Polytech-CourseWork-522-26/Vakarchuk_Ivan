@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Адмін-панель - SmartCook</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="/static/js/theme.js"></script>
+</head>
+<body style="background-color: var(--bg-color);">
+    <header class="navbar">
+        <a href="/" class="logo">SmartCook 🍳 <span style="color: var(--danger); font-size: 15px; font-weight: bold;">(Адмін)</span></a>
+        <nav>
+            <a href="/">Головна</a>
+            <a href="/admin" class="active">Панель керування</a>
+            <a href="/admin/stats">📊 Статистика</a>
+            <a href="/admin/reports">📝 Скарги</a>
+            <a href="/admin/ingredients">🥕 Інгредієнти</a>
+        </nav>
+        
+    </header>
+
+    <main style="max-width: 1200px; margin: 40px auto; padding: 0 20px;">
+        <h1 style="color: var(--text-primary); font-weight: 800; font-size: 32px; margin-bottom: 30px;">⚙️ Панель керування адміністратора</h1>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 30px;">
+            <div class="recipe-card" style="padding: 30px; text-align: center; justify-content: center; align-items: center; display: flex; flex-direction: column;">
+                <span style="font-size: 48px; margin-bottom: 15px;">📊</span>
+                <h3 style="font-size: 20px; font-weight: 700; color: var(--text-primary); margin-bottom: 20px;">Статистика системи</h3>
+                <a href="/admin/stats" class="btn btn-primary" style="width: 100%;">Переглянути статистику</a>
+            </div>
+            <div class="recipe-card" style="padding: 30px; text-align: center; justify-content: center; align-items: center; display: flex; flex-direction: column;">
+                <span style="font-size: 48px; margin-bottom: 15px;">📝</span>
+                <h3 style="font-size: 20px; font-weight: 700; color: var(--text-primary); margin-bottom: 20px;">Скарги на рецепти</h3>
+                <a href="/admin/reports" class="btn btn-primary" style="width: 100%;">Переглянути скарги</a>
+            </div>
+            <div class="recipe-card" style="padding: 30px; text-align: center; justify-content: center; align-items: center; display: flex; flex-direction: column;">
+                <span style="font-size: 48px; margin-bottom: 15px;">🥕</span>
+                <h3 style="font-size: 20px; font-weight: 700; color: var(--text-primary); margin-bottom: 20px;">Керування базою продуктів</h3>
+                <a href="/admin/ingredients" class="btn btn-primary" style="width: 100%;">Керувати інгредієнтами</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

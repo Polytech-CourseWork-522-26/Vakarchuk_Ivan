@@ -1,0 +1,230 @@
+/* Глобальні налаштування */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    color: #333333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Стилі для навігаційного меню (Navbar) */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nav-link {
+    margin-right: 15px;
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.nav-link:last-child {
+    margin-right: 0;
+}
+
+.nav-link.active {
+    color: #007aff;
+    font-weight: bold;
+}
+
+.auth-zone {
+    font-size: 14px;
+}
+
+.logout-link {
+    margin-left: 15px;
+    color: #ff3b30;
+    text-decoration: none;
+}
+
+/* Центрування основного контенту */
+.main-content {
+    display: flex;
+    justify-content: center;
+    padding: 30px 10px;
+    width: 100%;
+}
+
+/* Головний контейнер рецепту */
+.recipe-container {
+    width: 100%;
+    max-width: 600px;
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Блок з фото */
+.recipe-image-hero {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    display: block;
+}
+
+/* Текстовий блок картки */
+.card-body {
+    padding: 24px;
+}
+
+.recipe-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 16px;
+}
+
+/* Мета-дані (калорії, час, вага) */
+.meta-info {
+    display: flex;
+    gap: 15px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 16px;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.meta-item.calories {
+    color: #ff6b35;
+}
+
+.recipe-desc {
+    font-size: 14px;
+    color: #777777;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+/* Кнопка "Додати в улюблені" */
+.btn-fav {
+    background-color: #fff0f1;
+    color: #ff4d6d;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Кругла іконка зі знаком оклику */
+.info-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    background-color: #1a1a1a;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: bold;
+    margin-top: 16px;
+}
+
+/* Спільні стилі для розділів Інгредієнти та Приготування */
+.section-box {
+    padding: 24px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Таблиця інгредієнтів */
+.ingredients-list {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.ingredients-list tr {
+    border-bottom: 1px solid #f9f9f9;
+}
+
+.ingredients-list tr:last-child {
+    border-bottom: none;
+}
+
+.ingredients-list td {
+    padding: 12px 0;
+    font-size: 14px;
+    color: #333;
+}
+
+.ingredients-list td.amount {
+    text-align: right;
+    color: #888;
+}
+
+.ingredients-list td.name {
+    font-weight: 500;
+}
+
+/* Кроки приготування */
+.step-item {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.step-item:last-child {
+    margin-bottom: 0;
+}
+
+.step-number {
+    min-width: 28px;
+    height: 28px;
+    background-color: #222222;
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.step-text {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #333333;
+    padding-top: 3px;
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Редагування рецепту</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="/static/js/theme.js"></script>
+</head>
+<body style="background-color: var(--bg-color);">
+    <header class="navbar">
+        <a href="/" class="logo">SmartCook 🍳</a>
+        <nav>
+            <a href="/">Головна</a>
+            <a href="/favorites">Обране</a>
+            <a href="/shopping-list">Список покупок</a>
+            <a href="/create">Додати рецепт</a>
+            <a href="/profile">👤 Профіль</a>
+            {{#isAdmin}}
+            <a href="/admin" style="color: var(--danger); font-weight: bold;">⚙️ Адмін</a>
+            {{/isAdmin}}
+        </nav>
+        
+    </header>
+
+    <main class="edit-container">
+        <div class="create-card">
+            <h1>✏️ Редагування рецепту</h1>
+            <form id="edit-form">
+                <input type="hidden" id="recipe-id" value="{{id}}">
+
+                <div class="input-group">
+                    <label for="name">Назва страви</label>
+                    <input type="text" id="name" value="{{name}}" required placeholder="Введіть назву страви">
+                </div>
+
+                <div class="input-group">
+                    <label for="description">Короткий опис</label>
+                    <input type="text" id="description" value="{{description}}" required placeholder="Введіть опис страви">
+                </div>
+
+                <div class="input-group">
+                    <label for="calories">Калорійність (ккал)</label>
+                    <input type="number" id="calories" value="{{calories}}" required min="1">
+                </div>
+
+                <div class="input-group">
+                    <label for="video_url">Посилання на відео (YouTube)</label>
+                    <input type="url" id="video_url" value="{{video_url}}" placeholder="https://youtube.com/watch?v=...">
+                </div>
+
+                <div class="input-group">
+                    <label for="instructions">Покрокова інструкція</label>
+                    <textarea id="instructions" rows="12" required placeholder="Введіть покрокову інструкцію приготування">{{instructions}}</textarea>
+                </div>
+
+                <div style="display: flex; gap: 12px; margin-top: 25px;">
+                    <button type="submit" class="btn btn-primary" style="flex: 1;">💾 Зберегти зміни</button>
+                    <button type="button" class="btn btn-gray" onclick="history.back()" style="flex: 1;">Скасувати</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script src="/static/js/edit_recipe.js"></script>
+</body>
+</html>

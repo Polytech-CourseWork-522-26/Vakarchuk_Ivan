@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartCook - Вхід</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <script src="/static/js/theme.js"></script>
+</head>
+<body style="background-color: var(--bg-color);">
+    <div class="auth-container">
+        <div class="auth-card">
+            <h1>SmartCook 🍳</h1>
+            <p>Вхід до системи</p>
+            
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="user-name">Логін</label>
+                    <input type="text" id="user-name" name="username" placeholder="Введіть логін">
+                </div>
+                
+                <div class="input-group">
+                    <label for="user-password">Пароль</label>
+                    <input type="password" id="user-password" name="password" placeholder="Введіть пароль">
+                </div>
+
+                <span id="login-error" class="error-message" style="text-align: center; font-weight: 700; margin-bottom: 15px;"></span>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">Увійти</button>
+                <button type="button" id="guest-btn" class="btn btn-gray" style="width: 100%; margin-top: 12px;">Увійти як гість</button>
+            </form>
+
+            <div class="footer-link" style="margin-top: 30px; font-size: 14px; color: var(--text-secondary);">
+                Немає акаунта? <a href="/register" style="color: var(--primary); font-weight: 600; text-decoration: none;">Зареєструватися</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/login.js"></script>
+</body>
+</html>

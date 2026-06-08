@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartCook - Редагувати профіль</title>
+    <style>
+        :root {
+            --bg-color: #f5f5f7;
+            --card-bg: #ffffff;
+            --accent: #333333;
+            --text-sec: #8e8e93;
+            --input-bg: #f9f9f9;
+            --radius: 25px;
+            --radius-sm: 15px;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin: 0;
+            padding-top: 100px;
+            color: var(--accent);
+        }
+
+        /* Навігація */
+        .navbar {
+            position: fixed;
+            top: 0; width: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(15px);
+            display: flex;
+            justify-content: center;
+            padding: 20px 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .nav-links { display: flex; gap: 40px; }
+        .nav-links a { text-decoration: none; color: var(--accent); font-weight: 500; }
+        .nav-links a.active { font-weight: 700; }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .edit-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 40px;
+            box-shadow: var(--shadow);
+        }
+
+        .profile-avatar-edit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .avatar-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-image: url('https://via.placeholder.com/100'); /* Сюди встав фото з імамом */
+            background-size: cover;
+            background-position: center;
+            margin-bottom: 15px;
+            border: 3px solid #eee;
+        }
+
+        .change-photo-btn {
+            color: #007aff;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .form-section { margin-bottom: 25px; }
+        .form-section h3 { 
+            font-size: 16px; 
+            margin-bottom: 15px; 
+            color: var(--text-sec); 
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group { margin-bottom: 15px; }
+        
+        label { 
+            display: block; 
+            font-size: 13px; 
+            font-weight: 600; 
+            margin-bottom: 8px; 
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 14px;
+            background: var(--input-bg);
+            border: 1px solid #eee;
+            border-radius: var(--radius-sm);
+            font-size: 16px;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .btn-save {
+            width: 100%;
+            padding: 16px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+
+        .btn-save:hover { opacity: 0.9; transform: translateY(-1px); }
+
+        .hint {
+            font-size: 12px;
+            color: var(--text-sec);
+            margin-top: 5px;
+        }
+    </style>
+    <script src="/static/js/theme.js"></script>
+</head>
+<body>
+
+    <header class="navbar" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 30px; background-color: #f8f9fa; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+    <div class="logo" style="font-size: 26px; font-weight: bold;">SmartCook 🍳</div>
+    <nav>
+        <a href="/" style="margin-right:15px; text-decoration:none; color:#333;">Головна</a>
+        <a href="/favorites" style="margin-right:15px; text-decoration:none; color:#333;">Обране</a>
+        <a href="/shopping-list" style="margin-right:15px; text-decoration:none; color:#333;">Список покупок</a>
+        <a href="/create" style="margin-right:15px; text-decoration:none; color:#333;">Додати рецепт</a>
+        <a href="/profile" style="margin-right:15px; text-decoration:none; color:#333;">👤 Профіль</a>
+        {{#isAdmin}}
+        <a href="/admin" style="margin-right:15px; text-decoration:none; color:#ff3b30; font-weight:bold;">⚙️ Адмін-панель</a>
+        {{/isAdmin}}
+    </nav>
+    <div>Привіт, <strong>{{session_username}}</strong>! <a href="/logout" style="color:#ff3b30;">Вийти</a></div>
+</header>
+
+    <div class="container">
+        <div class="edit-card">
+            <div class="profile-avatar-edit">
+                <div class="avatar-circle"></div>
+                <span class="change-photo-btn">Змінити фото</span>
+                <input type="file" id="avatarInput" style="display: none;">
+            </div>
+
+            <form>
+                <div class="form-section">
+                    <h3>Основна інформація</h3>
+                    <div class="form-group">
+                        <label>Ім'я</label>
+                        <input type="text" value="Імам">
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>Фізичні параметри та цілі</h3>
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label>Вага (кг)</label>
+                            <input type="number" value="89">
+                        </div>
+                        <div class="form-group">
+                            <label>Ціль</label>
+                            <select>
+                                <option value="cut" selected>Сушка (Fat Loss)</option>
+                                <option value="bulk">Набір маси</option>
+                                <option value="maintain">Підтримка</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Активність</label>
+                        <select>
+                            <option>3 тренування на тиждень</option>
+                            <option>5 тренувань на тиждень</option>
+                            <option>Сидячий спосіб життя</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>Норма КБЖВ (Автоматично)</h3>
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label>Калорії</label>
+                            <input type="number" value="2200" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Білки (г)</label>
+                            <input type="number" value="150" readonly>
+                        </div>
+                    </div>
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label>Жири (г)</label>
+                            <input type="number" value="80" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Вуглеводи (г)</label>
+                            <input type="number" value="180" readonly>
+                        </div>
+                    </div>
+                    <p class="hint">Ці показники розраховані на основі твоєї ваги 89 кг для етапу сушки.</p>
+                </div>
+
+                <button type="submit" class="btn-save">Зберегти зміни</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

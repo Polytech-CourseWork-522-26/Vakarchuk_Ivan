@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartCook — Головна</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <script src="/static/js/theme.js"></script>
+</head>
+<body style="background-color: var(--bg-color);">
+
+    <header class="navbar">
+        <a href="/" class="logo">SmartCook 🍳</a>
+        <nav>
+            <a href="/" class="active">Головна</a>
+            <a href="/favorites">Обране</a>
+            <a href="/shopping-list">Список покупок</a>
+            <a href="/create">Додати рецепт</a>
+            <a href="/profile">👤 Профіль</a>
+            {{#isAdmin}}
+            <a href="/admin" style="color: var(--danger); font-weight: bold;">⚙️ Адмін</a>
+            {{/isAdmin}}
+        </nav>
+        
+    </header>
+
+    <main style="max-width: 1200px; margin: 40px auto; padding: 0 20px;">
+        <!-- Hero section -->
+        <div class="hero-section" style="text-align:center; padding: 50px 20px; background: linear-gradient(135deg, rgba(255, 107, 53, 0.04) 0%, rgba(255, 107, 53, 0) 100%); border-radius: var(--radius-lg); margin-bottom: 40px; border: 1px solid var(--border-color);">
+            <h1 style="font-weight: 800; font-size: 40px; background: var(--brand-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 12px;">Знаходь рецепти легко 🍳</h1>
+            <p style="color: var(--text-secondary); font-size: 16px; max-width: 600px; margin: 0 auto;">Ваш розумний кулінарний помічник. Шукайте за назвою, додавайте інгредієнти з холодильника та відкривайте нові смаки!</p>
+        </div>
+
+        <!-- Пошук за назвою -->
+        <div class="search-section">
+            <div class="search-input-wrap">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="name-search" class="search-input" placeholder="Пошук за назвою страви...">
+            </div>
+        </div>
+
+        <!-- Пошук за інгредієнтами -->
+        <div class="search-section" style="position: relative;">
+            <h3 style="margin-bottom: 15px; font-weight: 700; color: var(--text-primary);">Пошук за інгредієнтами</h3>
+            <div class="ingredients-container" id="selected-ingredients"></div>
+            
+            <div class="ingredients-search-row">
+                <div class="ingredients-search-wrap">
+                    <input type="text" id="ing-search-input" class="search-input" placeholder="Додати інгредієнт..." style="padding-left: 20px;">
+                    <div id="ing-dropdown" class="dropdown"></div>
+                </div>
+                <button id="add-ing-btn" class="btn btn-primary" style="padding: 14px 30px;">Додати</button>
+            </div>
+        </div>
+
+        <div id="results" class="recipe-card-grid"></div>
+    </main>
+
+    <script src="/static/js/index.js"></script>
+
+    <!-- Модальне вікно для гостя -->
+    <div id="guest-modal" class="modal-overlay" style="display:none;">
+        <div class="modal-content">
+            <h2 style="margin:0 0 15px 0; color: var(--text-primary);">🔒 Потрібна реєстрація</h2>
+            <p style="margin:0 0 25px 0;">Ця функція доступна лише зареєстрованим користувачам</p>
+            <a href="/register" class="btn btn-primary" style="display:block; width: 100%; text-align: center; margin-bottom:12px;">Зареєструватися</a>
+            <button onclick="document.getElementById('guest-modal').style.display='none'" class="btn btn-gray" style="width: 100%;">
+                Повернутися до головної
+            </button>
+        </div>
+    </div>
+
+<script>
+const IS_GUEST = "{{session_username}}" === "Гість";
+
+if (IS_GUEST) {
+    document.querySelectorAll('nav a').forEach(link => {
+        if (link.getAttribute('href') !== '/') {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.getElementById('guest-modal').style.display = 'flex';
+            });
+        }
+    });
+}
+</script>
+
+</body>
+</html>

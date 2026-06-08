@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartCook - Реєстрація</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <script src="/static/js/theme.js"></script>
+</head>
+<body style="background-color: var(--bg-color);">
+    <div class="auth-container">
+        <div class="auth-card">
+            <h1>SmartCook 🍳</h1>
+            <p>Створення акаунта</p>
+            
+            <form id="main-form" novalidate>
+                
+                <div class="input-group">
+                    <label for="user-name">Логін (Ім'я)</label>
+                    <input type="text" id="user-name" name="username" placeholder="Створіть логін">
+                    <span class="error-message" id="name-error"></span>
+                </div>
+
+                <div class="input-group">
+                    <label for="user-email">Електронна пошта</label>
+                    <input type="email" id="user-email" name="email" placeholder="Введіть email">
+                    <span class="error-message" id="email-error"></span>
+                </div>
+                
+                <div class="input-group">
+                    <label for="user-password">Пароль</label>
+                    <input type="password" id="user-password" name="password" placeholder="Створіть пароль">
+                    <span class="error-message" id="password-error"></span>
+                </div>
+
+                <div class="input-group">
+                    <label for="user-diet">Тип дієти</label>
+                    <input type="text" id="user-diet" name="diet" placeholder="Наприклад: вегетаріанська (необов'язково)">
+                </div>
+
+                <div class="input-group">
+                    <label for="user-allergies">Харчові алергії</label>
+                    <input type="text" id="user-allergies" name="allergies" placeholder="Наприклад: горіхи, мед (необов'язково)">
+                </div>
+
+                <button type="submit" id="save-btn" class="btn btn-primary" style="width: 100%; margin-top: 15px;">Зареєструватися</button>
+            </form>
+
+            <div class="footer-link" style="margin-top: 30px; font-size: 14px; color: var(--text-secondary);">
+                Вже є акаунт? <a href="/login" style="color: var(--primary); font-weight: 600; text-decoration: none;">Увійти</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/register.js"></script>
+</body>
+</html>

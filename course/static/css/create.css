@@ -1,0 +1,173 @@
+.create-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.create-card {
+    background: #fff;
+    padding: 40px 50px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.create-card h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #1c1c1e;
+    font-size: 28px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+    font-size: 15px;
+}
+
+.input-group input,
+.input-group textarea,
+.input-group select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+}
+
+.input-group input:focus,
+.input-group textarea:focus,
+.input-group select:focus {
+    outline: none;
+    border-color: #34c759;
+}
+
+.input-group textarea {
+    min-height: 160px;
+    resize: vertical;
+}
+
+/* Сітка для двох колонок */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* Блок інгредієнтів */
+.ingredients-section {
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 12px;
+    margin: 25px 0;
+}
+
+.ingredients-section h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 18px;
+    color: #1c1c1e;
+}
+
+.ingredients-search-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 15px;
+    align-items: center;
+}
+
+.ingredients-search-wrap {
+    flex: 1;
+    position: relative;
+}
+
+.ingredients-search-wrap input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#search-dropdown {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 48px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    z-index: 1000;
+    max-height: 300px;
+    overflow-y: auto;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.dropdown-item {
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.dropdown-item:hover {
+    background: #f0f0f0;
+}
+
+#ingredient-qty {
+    width: 130px;
+}
+
+#add-ing-row-btn {
+    padding: 12px 22px;
+    background: #34c759;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#add-ing-row-btn:hover {
+    background: #2db34a;
+}
+
+/* Кнопка збереження */
+.btn-save {
+    width: 100%;
+    padding: 16px;
+    font-size: 18px;
+    font-weight: 600;
+    background: #34c759;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-save:hover {
+    background: #2db34a;
+}
+
+.btn-save:disabled {
+    background: #aaa;
+    cursor: not-allowed;
+}
+
+#submit-error {
+    color: red;
+    text-align: center;
+    margin-top: 12px;
+    display: block;
+    font-size: 14px;
+}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Скарги - Адмін</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="/static/js/theme.js"></script>
+</head>
+<body>
+    <header class="navbar">
+        <a href="/" class="logo">SmartCook 🍳 <span style="color: var(--danger); font-size: 15px; font-weight: bold;">(Адмін)</span></a>
+        <nav>
+            <a href="/">Головна</a>
+            <a href="/admin">Панель керування</a>
+            <a href="/admin/stats">📊 Статистика</a>
+            <a href="/admin/reports" class="active">📝 Скарги</a>
+            <a href="/admin/ingredients">🥕 Інгредієнти</a>
+        </nav>
+        
+    </header>
+
+    <main class="shopping-container" style="margin-top: 50px;">
+        <div class="shopping-card">
+            <h1 style="color: var(--text-primary); font-weight: 800; font-size: 32px; margin-bottom: 30px; text-align: center;">📝 Скарги на рецепти</h1>
+
+            {{#has_reports}}
+            <div style="margin-top: 20px;">
+                {{#reports}}
+                <div class="report-item">
+                    <div class="report-content">
+                        <h4 style="margin: 0 0 8px 0; font-size: 18px;">
+                            <a href="/recipe/{{recipe_id}}" style="color: var(--primary); text-decoration: none; font-weight: 700;">{{recipe_name}}</a>
+                        </h4>
+                        <div class="report-meta-text">Відправник: <strong>{{reporter}}</strong> • Дата: {{report_date}}</div>
+                        <div class="report-reason" style="margin-top: 10px;">{{reason}}</div>
+                    </div>
+                    <div class="report-actions">
+                        <button onclick="markAsChecked({{recipe_id}})" class="btn btn-primary btn-small">
+                            ✅ Перевірено
+                        </button>
+                    </div>
+                </div>
+                {{/reports}}
+            </div>
+            {{/has_reports}}
+
+            {{^has_reports}}
+            <div class="no-reports" style="margin-top: 20px;">
+                Наразі скарг немає. Всі рецепти перевірені та безпечні!
+            </div>
+            {{/has_reports}}
+
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="/admin" class="btn btn-gray">Повернутися назад</a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+    function markAsChecked(recipeId) {
+        if (!confirm("Позначити скаргу як перевірену та видалити її?")) return;
+
+        fetch(`/api/report/${recipeId}`, {
+            method: 'DELETE'
+        })
+        .then(r => r.json())
+        .then(data => {
+            if (data.status === "success") {
+                alert("Скаргу позначено як перевірену.");
+                location.reload();
+            } else {
+                alert("Не вдалося видалити скаргу.");
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            alert("Помилка з'єднання з сервером.");
+        });
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartCook — Моє обране</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <script src="/static/js/theme.js"></script>
+</head>
+<body style="background-color: var(--bg-color);">
+
+    <header class="navbar">
+        <a href="/" class="logo">SmartCook 🍳</a>
+        <nav>
+            <a href="/">Головна</a>
+            <a href="/favorites" class="active">Обране</a>
+            <a href="/shopping-list">Список покупок</a>
+            <a href="/create">Додати рецепт</a>
+            <a href="/profile">👤 Профіль</a>
+            {{#isAdmin}}
+            <a href="/admin" style="color: var(--danger); font-weight: bold;">⚙️ Адмін</a>
+            {{/isAdmin}}
+        </nav>
+        
+    </header>
+
+    <main style="max-width: 1200px; margin: 40px auto; padding: 0 20px;">
+        <h1 style="color: var(--text-primary); font-weight: 800; font-size: 32px; margin-bottom: 30px;">❤️ Ваші обрані рецепти</h1>
+        
+        <div id="favorites-grid" class="recipe-card-grid">
+            
+            {{#favorites}}
+            <div class="recipe-card">
+                <div class="recipe-card-img-wrap" style="display: flex; align-items: center; justify-content: center; background: var(--primary-light);">
+                    <span style="font-size: 54px;">❤️</span>
+                </div>
+                <div class="recipe-card-content">
+                    <a href="/recipe/{{id}}" class="recipe-card-title">
+                        {{name}}
+                    </a>
+                    <p class="recipe-card-desc">
+                        {{description}}
+                    </p>
+                    <div class="recipe-card-meta">
+                        <span class="recipe-card-calories">🔥 {{calories}} ккал</span>
+                        <button onclick="removeFromFavorites({{id}})" class="btn btn-danger btn-small">
+                            Видалити
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {{/favorites}}
+
+            {{^favorites}}
+            <div style="grid-column: 1 / -1; text-align: center; padding: 80px 20px; background: var(--card-bg); border-radius: var(--radius-lg); border: 2px dashed var(--border-color); box-shadow: var(--shadow-md);">
+                <p style="font-size: 20px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px;">У вас поки що немає обраних рецептів.</p>
+                <p style="color: var(--text-secondary); font-size: 15px; margin-bottom: 20px;">Додайте рецепти з головної сторінки, щоб вони з'явилися тут</p>
+                <a href="/" class="btn btn-primary">Знайти рецепти</a>
+            </div>
+            {{/favorites}}
+        </div>
+    </main>
+
+    <script>
+    function removeFromFavorites(recipeId) {
+        if (!confirm("Видалити цей рецепт з обраного?")) return;
+
+        fetch('/api/remove-favorite', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            credentials: 'include',
+            body: 'recipe_id=' + recipeId
+        })
+        .then(r => r.json())
+        .then(data => {
+            if (data.status === 'success') {
+                location.reload();
+            } else {
+                alert("Помилка: " + (data.message || "Невідома помилка"));
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            alert("Помилка з'єднання з сервером");
+        });
+    }
+    </script>
+</body>
+</html>
