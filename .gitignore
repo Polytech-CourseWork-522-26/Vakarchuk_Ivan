@@ -12,6 +12,7 @@ out/
 vcpkg_installed/
 .vcpkg-root
 vcpkg/
+course/libs/
 # Якщо твої ліби лежать у конкретній папці, наприклад "libs", і ти не хочеш їх пушити:
 # libs/
 
